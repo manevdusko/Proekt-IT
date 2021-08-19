@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,13 +13,28 @@ namespace Proekt_IT.Controllers
 {
     public class MenusController : Controller
     {
-        private RestaurantContext db = new RestaurantContext();
+        private RestaurantContext db = null;
 
-        // GET: Menus
+        public MenusController()
+        {
+            this.db = new RestaurantContext();
+        }
+
         public ActionResult Index()
         {
             return View(db.menu.ToList());
         }
+
+        public ActionResult ShoppingCart()
+        {
+            List<Menu> temp = new List<Menu>();
+            foreach(ShoppingCart sc in db.shoppingCart.ToList())
+            {
+                temp.Add(db.menu.Find(sc.productId));
+            }
+            return View(temp);
+        }
+
 
         // GET: Menus/Details/5
         public ActionResult Details(int? id)
@@ -83,6 +99,20 @@ namespace Proekt_IT.Controllers
                 return RedirectToAction("Index");
             }
             return View(menu);
+        }
+
+        public ActionResult Meni()
+        {
+            return View(db.menu.ToList());
+        }
+
+        public ActionResult AddToCart(int id)
+        {
+            ShoppingCart sc = new ShoppingCart();
+            sc.productId = id;
+            db.shoppingCart.Add(sc);
+            db.SaveChanges();
+            return RedirectToAction("Meni");
         }
 
         [Authorize]
