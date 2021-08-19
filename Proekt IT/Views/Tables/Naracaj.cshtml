@@ -1,0 +1,64 @@
+﻿@model Proekt_IT.Models.Naracka
+
+@{
+    ViewBag.Title = "Нарачка";
+}
+
+<h2>Нарачка- маса број @Model.table.id</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.table.id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.table.brojNaGosti, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @if (Model.table.brojNaGosti == -1 || Model.table.brojNaGosti == 0)
+            {
+            <input type="number" name="brojNaGosti" id="brojNaGosti"/>
+                }
+                else
+                {
+                    <p>На масата има @Model.table.brojNaGosti гости</p>
+                }
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.table.orders, "Производи", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <form method="post">
+                <select style="width: 120%;" id="naracka" name="naracka" multiple="multiple">
+                    @foreach (Proekt_IT.Models.Menu m in Model.menu)
+                    {
+                        <option value="@m.id">@m.imeNaJadenje</option>
+                    }
+                </select>
+                <hr/>
+                <br/>
+                <input type="submit" value="Нарачај" class="btn btn-default" />
+            </form>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

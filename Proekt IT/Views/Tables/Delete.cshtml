@@ -1,0 +1,39 @@
+﻿@model Proekt_IT.Models.Table
+
+@{
+    ViewBag.Title = "Отстрани";
+}
+
+<h2>Отстрани маса со број @Model.id</h2>
+
+<h3>Дали навистина сакате да ја отстраните оваа маса?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.brojNaGosti)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brojNaGosti)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sum)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Отстрани" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>
