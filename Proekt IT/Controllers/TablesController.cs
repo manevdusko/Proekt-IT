@@ -132,7 +132,7 @@ namespace Proekt_IT.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Tables/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
