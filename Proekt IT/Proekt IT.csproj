@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenusController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,6 +186,10 @@
     <Compile Include="Migrations\202108191238461_ListOfOrders1.cs" />
     <Compile Include="Migrations\202108191238461_ListOfOrders1.Designer.cs">
       <DependentUpon>202108191238461_ListOfOrders1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108191707103_DisplayImageInMenu.cs" />
+    <Compile Include="Migrations\202108191707103_DisplayImageInMenu.Designer.cs">
+      <DependentUpon>202108191707103_DisplayImageInMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,6 +264,11 @@
     <Content Include="Views\Tables\Naracaj.cshtml" />
     <Content Include="Views\Tables\Index.cshtml" />
     <Content Include="Views\Tables\Smetka.cshtml" />
+    <Content Include="Views\Menus\Create.cshtml" />
+    <Content Include="Views\Menus\Delete.cshtml" />
+    <Content Include="Views\Menus\Details.cshtml" />
+    <Content Include="Views\Menus\Edit.cshtml" />
+    <Content Include="Views\Menus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -285,6 +295,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108191238461_ListOfOrders1.resx">
       <DependentUpon>202108191238461_ListOfOrders1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108191707103_DisplayImageInMenu.resx">
+      <DependentUpon>202108191707103_DisplayImageInMenu.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,7 +15,16 @@
         </dt>
 
         <dd>
+            @if (Model.brojNaGosti == -1)
+            {
+
+
+<p>слободна</p>
+            }
+            else
+            {
             @Html.DisplayFor(model => model.brojNaGosti)
+            }
         </dd>
         <dt>
             Имате нарачано:

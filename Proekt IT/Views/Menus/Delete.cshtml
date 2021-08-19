@@ -1,0 +1,47 @@
+﻿@model Proekt_IT.Models.Menu
+
+@{
+    ViewBag.Title = "Избриши";
+}
+
+<h2>Избриши</h2>
+
+<h3>Дали навистина сакате да го избришате овој производ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imeNaJadenje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imeNaJadenje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sostojki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sostojki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cena)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Избриши" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

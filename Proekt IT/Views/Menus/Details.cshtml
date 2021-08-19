@@ -1,0 +1,48 @@
+﻿@model Proekt_IT.Models.Menu
+
+@{
+    ViewBag.Title = "Детали";
+}
+
+<h2>Детали</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+           <img src="@Model.imgUrl" style="width:200px;"/>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.imeNaJadenje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imeNaJadenje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sostojki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sostojki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cena)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Измени", "Edit", new { id = Model.id }) @:|
+    }
+    @Html.ActionLink("Нарачај", "OnlineOrder", new { id = Model.id }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

@@ -12,13 +12,13 @@ namespace Proekt_IT.Controllers
     {
         private RestaurantContext db = new RestaurantContext();
 
-        // GET: Tables
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.tables.ToList());
         }
 
-        // GET: Tables/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -33,7 +33,7 @@ namespace Proekt_IT.Controllers
             return View(table);
         }
 
-
+        [Authorize]
         public ActionResult Create()
         {
             Table table = new Table();
@@ -44,7 +44,7 @@ namespace Proekt_IT.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize]
         public ActionResult Naracaj(int? id)
         {
             if (id == null)
@@ -72,6 +72,7 @@ namespace Proekt_IT.Controllers
             return View(naracka);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Naracaj([Bind(Include = "id,brojNaGosti,sum")] Table table)
@@ -100,7 +101,7 @@ namespace Proekt_IT.Controllers
             return View(table);
         }
 
-        // GET: Tables/Delete/5
+        [Authorize]
         public ActionResult Smetka(int? id)
         {
             if (id == null)
@@ -115,7 +116,7 @@ namespace Proekt_IT.Controllers
             return View(table);
         }
 
-        // POST: Tables/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Smetka")]
         [ValidateAntiForgeryToken]
         public ActionResult SmetkaConfirmed(int id)
@@ -128,7 +129,7 @@ namespace Proekt_IT.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -143,7 +144,7 @@ namespace Proekt_IT.Controllers
             return View(table);
         }
 
-        // POST: Tables/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -8,6 +8,9 @@ namespace Proekt_IT.Models
         [Key]
         public int id { get; set; }
 
+        [DisplayName("Слика")]
+        public string imgUrl { get; set; }
+
         [DisplayName("Име на производ")]
         public string imeNaJadenje { get; set; }
 

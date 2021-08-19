@@ -4,8 +4,16 @@
     ViewBag.Title = "Маси";
 }
 
-<h2>Сита маси во ресторанот</h2>
-
+<h2>Сите маси во ресторанот</h2>
+@{ int c = 0;}
+@foreach (var item in Model)
+    {
+        if (item.brojNaGosti == -1)
+        {
+            c++;
+        }
+    }
+    <h5>Во ресторанот има @c слободни маси.</h5>
 <p>
     @Html.ActionLink("Додај нова маса", "Create")
 </p>
@@ -23,39 +31,47 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.id)
-    </td>
-    <td>
-        @if (item.brojNaGosti == -1)
-        {
-            <p>Слободна</p>
-        }
-        else
-        {
+    @foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @if (item.brojNaGosti == -1)
+                    {
+                        <p style="background: green; color:white;">Слободна</p>
+                    }
+                    else
+                    {
 
-            @Html.DisplayFor(modelItem => item.brojNaGosti)
-        }
-    </td>
-    <td>
-        @if (item.sum == -1)
-        {
-            <p>Слободна</p>
-        }
-        else
-        {
+                        @Html.DisplayFor(modelItem => item.brojNaGosti)
+                    }
+                </td>
+                <td>
+                    @if (item.sum == -1)
+                    {
+                        <p>Слободна</p>
+                    }
+                    else
+                    {
 
-            @Html.DisplayFor(modelItem => item.sum)
+                        @Html.DisplayFor(modelItem => item.sum)
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Нарачка", "Naracaj", new { id = item.id }) |
+                    @if (item.brojNaGosti != -1)
+                    {
+                        @Html.ActionLink("Сметка", "Smetka", new { id = item.id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Отстрани маса ", "Delete", new { id = item.id })
+                    }
+                    
+                </td>
+            </tr>
         }
-    </td>
-    <td>
-        @Html.ActionLink("Нарачка", "Naracaj", new { id = item.id }) |
-        @Html.ActionLink("Сметка", "Smetka", new { id = item.id }) |
-        @Html.ActionLink("Отстрани маса ", "Delete", new { id = item.id })
-    </td>
-</tr>
-}
 
-</table>
+    </table>

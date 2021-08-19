@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Proekt_IT.Models.Menu>
+
+@{
+    ViewBag.Title = "Мени";
+}
+
+<h2>Мени</h2>
+
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Додај нов производ", "Create")
+    }
+    </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.imeNaJadenje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sostojki)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cena)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img src="@item.imgUrl" style="width:100px;" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.imeNaJadenje)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.sostojki)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cena)
+    </td>
+    <td>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Измени", "Edit", new { id = item.id }) @:|
+            @Html.ActionLink("Избриши", "Delete", new { id = item.id }) @:|
+        }
+        else
+        {
+            @Html.ActionLink("Нарачај", "Details", new { id = item.id }) @:|
+        }
+        @Html.ActionLink("Детали", "Details", new { id = item.id })
+
+    </td>
+</tr>
+}
+
+</table>
