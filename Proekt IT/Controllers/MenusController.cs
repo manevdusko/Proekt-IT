@@ -5,8 +5,11 @@ using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Aspose.Email.Clients;
+using Aspose.Email.Clients.Smtp;
 using Proekt_IT.Models;
 
 namespace Proekt_IT.Controllers
@@ -14,6 +17,13 @@ namespace Proekt_IT.Controllers
     public class MenusController : Controller
     {
         private RestaurantContext db = null;
+
+        private string smtpFrom = "dushkomanev@outlook.com";
+        private string SMTPhost = "smtp.office365.com";
+        private int SMTPport = 587;
+
+        private string username = "dushkomanev@outlook.com";
+        private string password = "nSbW!pK!GesveZybMQ#uagwUwR76ykCw7MQXquM89XDP&EM^C1M^7K4Hv3ZY";
 
         public MenusController()
         {
@@ -106,13 +116,63 @@ namespace Proekt_IT.Controllers
             return View(db.menu.ToList());
         }
 
-        public ActionResult AddToCart(int id)
+        private void sendMail(string to, string title, string body)
+        {
+            try
+            {
+                //nova poraka
+                Aspose.Email.MailMessage EmailMessage = new Aspose.Email.MailMessage();
+
+                //popolnuvanje na porakata
+                EmailMessage.Subject = title;
+                EmailMessage.To = to;
+                EmailMessage.Body = body;
+                EmailMessage.From = smtpFrom;
+
+                //Inicijalizacija na smtp klient
+                SmtpClient SMTPEmailClient = new SmtpClient();
+
+                //postavuvanje na postavkite na smtp
+                SMTPEmailClient.Host = SMTPhost;
+                SMTPEmailClient.Username = username;
+                SMTPEmailClient.Password = password;
+                SMTPEmailClient.Port = SMTPport;
+                SMTPEmailClient.SecurityOptions = SecurityOptions.SSLExplicit;
+
+                //prakjanje na mailot
+                SMTPEmailClient.Send(EmailMessage);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public ActionResult Naracaj()
+        {
+            Debug.WriteLine(Request.Form["email"]);
+            int c = 0;
+            StringBuilder sb = new StringBuilder();
+
+            foreach(ShoppingCart m in db.shoppingCart.ToList())
+            {
+                Menu tmp = db.menu.Find(m.productId);
+                c += tmp.cena;
+                sb.Append(tmp.imeNaJadenje + ", ");
+                db.shoppingCart.Remove(m);
+            }
+            sendMail(Request.Form["email"], "Успешна нарачка од нашиот ресторант", "Вашата нарачка е успешна и ќе биде доставена на адреса " + Request.Form["address"] + ". Имате вкупно: " + c + " денари за наплата а нарачавте: " + sb.ToString());
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+            public ActionResult AddToCart(int id)
         {
             ShoppingCart sc = new ShoppingCart();
             sc.productId = id;
             db.shoppingCart.Add(sc);
             db.SaveChanges();
-            return RedirectToAction("Meni");
+            return RedirectToAction("Index");
         }
 
         [Authorize]

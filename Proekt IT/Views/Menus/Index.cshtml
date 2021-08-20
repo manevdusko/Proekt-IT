@@ -1,62 +1,60 @@
 ﻿@model IEnumerable<Proekt_IT.Models.Menu>
-
 @{
     ViewBag.Title = "Мени";
 }
 
-<h2>Мени</h2>
-
-<p>
-    @if (User.Identity.IsAuthenticated)
-    {
-        @Html.ActionLink("Додај нов производ", "Create")
-    }
-    </p>
-<table class="table">
-    <tr>
-        <th>
-            
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.imeNaJadenje)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sostojki)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cena)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-<tr>
-    <td>
-        <img src="@item.imgUrl" style="width:100px;" />
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.imeNaJadenje)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.sostojki)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.cena)
-    </td>
-    <td>
+    <script type="text/javascript">
+        function AddToCart(item) {
+            alert("Успешно додадено во кошничка!");
+            window.location = "/Menus/AddToCart/" + item;
+        }
+        function Edit(item) {
+            window.location = "/Menus/Edit/" + item;
+        }
+        function Delete(item) {
+            window.location = "/Menus/Delete/" + item;
+        }
+        function Create() {
+            window.location = "/Menus/Create/";
+        }
+    </script>
+    <div class="container">
+        <h2 style="position:relative; left:50%;">Мени</h2>
         @if (User.Identity.IsAuthenticated)
         {
-            @Html.ActionLink("Измени", "Edit", new { id = item.id }) @:|
-            @Html.ActionLink("Избриши", "Delete", new { id = item.id }) @:|
+            <input type="button" style="position:relative; left:50%;" value="Додај" class="btn btn-primary" onclick="Create()" />
         }
-        else
+        <hr/>
+        @foreach (var item in Model)
         {
-            @Html.ActionLink("Нарачај", "Details", new { id = item.id }) @:|
+            <div class="col-md-4" style="border: 2px solid black">
+                <div style="text-align: center; border-bottom: 2px solid maroon">
+                    <h3>@item.imeNaJadenje</h3>
+                </div>
+                <div>
+                    <div class="col-md-8">
+                        <img src="@Url.Content(@item.imgUrl)" width="150px" height="150px" />
+                    </div>
+                    <div class="col-md-4" style="text-align: left">
+                        <b>@item.sostojki</b>
+                    </div>
+                </div>
+
+                <div class="col-md-8" style="font-size: 18px; border-top: 2px solid maroon; padding: 2px">
+                    <b>@item.cena.ToString("#,##0.00 MKD")</b>
+                </div>
+                <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid maroon; padding: 2px">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <input type="button" value="Измени" class="btn btn-primary" onclick="Edit(@item.id)" />
+                        <input type="button" value="Избриши" class="btn btn-primary" onclick="Delete(@item.id)" />
+                    }
+                    else
+                    {
+                        <input type="button" name="AddToCart" value="Нарачај" class="btn btn-primary" itemid="@item.id" id="btnAddToCart" onclick="AddToCart(@item.id)" />
+                    }
+                </div>
+
+            </div>
         }
-        @Html.ActionLink("Детали", "Details", new { id = item.id })
-
-    </td>
-</tr>
-}
-
-</table>
+    </div>

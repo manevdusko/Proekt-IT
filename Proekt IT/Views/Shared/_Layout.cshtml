@@ -7,8 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    @*Можност за online нарачка,
-        правење платен список со број на работни часови...*@
+    @*правење платен список со број на работни часови...*@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,9 +23,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Маси", "Index", "Tables")</li>
-                    <li>@Html.ActionLink("Мени", "Index", "Menus")</li>
-                </ul>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Маси", "Index", "Tables")</li>
+                    }
+                        <li>@Html.ActionLink("Мени", "Index", "Menus")</li>
+                    </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

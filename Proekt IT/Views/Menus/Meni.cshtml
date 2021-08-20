@@ -1,38 +1,103 @@
 ﻿@model IEnumerable<Proekt_IT.Models.Menu>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Мени";
 }
+@if (User.Identity.IsAuthenticated)
+{
 
-<script type="text/javascript">
-    function AddToCart(item) {
-        window.location = "AddToCart/" + item;
-    }
-</script>
-<div class="container">
-    <h2 class="text-center">Мени</h2>
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4" style="border: 2px solid black">
-            <div style="text-align: center; border-bottom: 2px solid maroon">
-                <h3>@item.imeNaJadenje</h3>
-            </div>
-            <div>
-                <div class="col-md-8">
-                    <img src="@Url.Content(@item.imgUrl)" width="150px" height="150px" />
+
+    <h2>Мени</h2>
+
+    <p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Додај нов производ", "Create")
+        }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imeNaJadenje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sostojki)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cena)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.imgUrl" style="width:100px;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.imeNaJadenje)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sostojki)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cena)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Измени", "Edit", new { id = item.id }) @:|
+                        @Html.ActionLink("Избриши", "Delete", new { id = item.id }) @:|
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Нарачај", "Details", new { id = item.id }) @:|
+                    }
+                    @Html.ActionLink("Детали", "Details", new { id = item.id })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+else
+{
+
+    <script type="text/javascript">
+        function AddToCart(item) {
+            window.location = "AddToCart/" + item;
+        }
+    </script>
+    <div class="container">
+        <h2 class="text-center">Мени</h2>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4" style="border: 2px solid black">
+                <div style="text-align: center; border-bottom: 2px solid maroon">
+                    <h3>@item.imeNaJadenje</h3>
                 </div>
-                <div class="col-md-4" style="text-align: left">
-                    <b>@item.sostojki</b>
+                <div>
+                    <div class="col-md-8">
+                        <img src="@Url.Content(@item.imgUrl)" width="150px" height="150px" />
+                    </div>
+                    <div class="col-md-4" style="text-align: left">
+                        <b>@item.sostojki</b>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-8" style="font-size: 18px; border-top: 2px solid maroon; padding: 2px">
-                <b>@item.cena.ToString("#,##0.00 MKD")</b>
-            </div>
-            <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid maroon; padding: 2px">
-                <input type="button" name="AddToCart" value="Add to Cart" class="btn btn-primary" itemid="@item.id" id="btnAddToCart" onclick="AddToCart(@item.id)" />
-            </div>
+                <div class="col-md-8" style="font-size: 18px; border-top: 2px solid maroon; padding: 2px">
+                    <b>@item.cena.ToString("#,##0.00 MKD")</b>
+                </div>
+                <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid maroon; padding: 2px">
+                    <input type="button" name="AddToCart" value="Нарачај" class="btn btn-primary" itemid="@item.id" id="btnAddToCart" onclick="AddToCart(@item.id)" />
+                </div>
 
-        </div>
-    }
-</div>
+            </div>
+        }
+    </div>
+}

@@ -3,57 +3,78 @@
     ViewBag.Title = "Кошничка";
     decimal TotalAmount = 0.00M;
 }
-
-
-
+<script type="text/javascript">
+    function naracaj() {
+        alert("Вашата нарачка е успешна.");
+    }
+    function praznaKosnicka() {
+        alert("Вашата кошничка е празна.")
+        window.location = "/Menus/Index/";
+    }
+</script>
 
 <h2>Кошничка</h2>
-
-@using (Html.BeginForm("AddOrder", "Shopping", FormMethod.Post))
+@if (Model.Count() != 0)
 {
-    <table class="table-condensed" style="width: 100%">
-        @foreach (var item in Model)
-        {
-            TotalAmount += item.cena;
-            <tr>
-                <td>
-                    <img src="@Url.Content(item.imgUrl)" height="50px" width="50px" class="img-rounded" />
-                </td>
-                <td>
-                    @item.imeNaJadenje
+    using (Html.BeginForm("Naracaj", "Menus", FormMethod.Post))
+    {
+        <table class="table-condensed" style="width: 100%">
+            @foreach (var item in Model)
+            {
+                TotalAmount += item.cena;
+                <tr>
+                    <td>
+                        <img src="@Url.Content(item.imgUrl)" height="50px" width="50px" class="img-rounded" />
+                    </td>
+                    <td>
+                        @item.imeNaJadenje
+                    </td>
+                    <td style="text-align: right">
+                        1
+                    </td>
+                    <td style="text-align: right">
+                        @item.cena.ToString("#,##0.00")
+                    </td>
+                    <td style="text-align: right">
+                        @item.cena.ToString("#,##0.00")
+                    </td>
+                </tr>
+            }
+            <tr style="border-top: 2px solid maroon">
+                <td colspan="4" style="text-align: right">
+                    <h3>За наплата:</h3>
                 </td>
                 <td style="text-align: right">
-                    1
-                   @* @item.Quantity.ToString("#,##0")*@
-                </td>
-                <td style="text-align: right">
-                    @item.cena.ToString("#,##0.00")
-                </td>
-                <td style="text-align: right">
-                    @item.cena.ToString("#,##0.00")
+                    <h3>@TotalAmount.ToString("#,##0.00")</h3>
                 </td>
             </tr>
-        }
-        <tr style="border-top: 2px solid maroon">
-            <td colspan="4" style="text-align: right">
-                <h3>За наплата:</h3>
-            </td>
-            <td style="text-align: right">
-                <h3>@TotalAmount.ToString("#,##0.00")</h3>
-            </td>
-        </tr>
 
-        <tr style="text-align: right">
-            <td colspan="5">
-                <input type="submit" value="Нарачај" name="Save" class="btn btn-primary" id="SaveOrder" />
-            </td>
-        </tr>
+            <tr>
+                <td colspan="5">
+                    <label>E-mail:</label>
+                    <input type="text" name="email" id="email" />
+                    <label>Адреса:</label>
+                    <input type="text" name="address" id="address" />
+                </td>
+            </tr>
 
-        <tr style="text-align: center">
-            <td colspan="5">
-                @Html.ActionLink("Назад кон менито", "Index", "Menus")
-            </td>
-        </tr>
-    </table>
 
+            <tr style="text-align: right">
+                <td colspan="5">
+                    <input type="submit" value="Нарачај" name="Save" class="btn btn-primary" onclick="naracaj()" id="SaveOrder" />
+                </td>
+            </tr>
+
+            <tr style="text-align: center">
+                <td colspan="5">
+                    @Html.ActionLink("Назад кон менито", "Index", "Menus")
+                </td>
+            </tr>
+        </table>
+
+    }
 }
+else
+{
+ <iframe onload="praznaKosnicka()">Вашата кошничка е празна.</iframe>
+ }
