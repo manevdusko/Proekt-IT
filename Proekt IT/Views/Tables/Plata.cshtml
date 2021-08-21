@@ -1,11 +1,48 @@
-﻿
+﻿@model IEnumerable<Proekt_IT.Models.Vraboten>
+
 @{
-    ViewBag.Title = "Plata";
+    ViewBag.Title = "Маси";
 }
 
-<h2>Плата</h2>
+<h2>Платен извештај</h2>
+<form method="post">
+    <label>Внеси саатнина</label>
+    <input type="number" name="saatnina" id="saatnina"/>
+    <input type="submit" value="OK"/>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            Email на вработен
+        </th>
+        <th>
+            Работни часови
+        </th>
+        <th>
+            Промет
+        </th>
+        <th>
+            Плата
+        </th>
+        <th></th>
+    </tr>
 
-<select name="vraboteni" id="vraboteni">
-    
-</select>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @item.raboteno.Days @item.raboteno.Hours:@item.raboteno.Minutes:@item.raboteno.Seconds
+            </td>
+            <td>
+                @item.promet.ToString("0.## денари")
+            </td>
+            <td>
+                @item.plata.ToString("0.## денари")
+            </td>
+        </tr>
+    }
 
+</table>

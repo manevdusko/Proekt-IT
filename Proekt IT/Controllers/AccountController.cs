@@ -410,9 +410,8 @@ namespace Proekt_IT.Controllers
             
                 if (db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0) != null)
                 {
-                    Debug.WriteLine("Pronajden");
                     db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).odjava = DateTime.UtcNow.TimeOfDay;
-                    db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).raboteno.Add(db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).odjava.Subtract(db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).najava));
+                    db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).raboteno = db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).raboteno.Add(db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).odjava.Subtract(db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).najava));
                 }
                  db.SaveChanges();            
            

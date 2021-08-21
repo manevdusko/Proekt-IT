@@ -215,9 +215,9 @@
     <Compile Include="Migrations\202108192144183_ShoppingCart11.Designer.cs">
       <DependentUpon>202108192144183_ShoppingCart11.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202108211514249_Vraboteni.cs" />
-    <Compile Include="Migrations\202108211514249_Vraboteni.Designer.cs">
-      <DependentUpon>202108211514249_Vraboteni.cs</DependentUpon>
+    <Compile Include="Migrations\202108211812361_Vraboten.cs" />
+    <Compile Include="Migrations\202108211812361_Vraboten.Designer.cs">
+      <DependentUpon>202108211812361_Vraboten.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -341,8 +341,8 @@
     <EmbeddedResource Include="Migrations\202108192144183_ShoppingCart11.resx">
       <DependentUpon>202108192144183_ShoppingCart11.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108211514249_Vraboteni.resx">
-      <DependentUpon>202108211514249_Vraboteni.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202108211812361_Vraboten.resx">
+      <DependentUpon>202108211812361_Vraboten.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

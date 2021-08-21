@@ -55,12 +55,18 @@ namespace Proekt_IT.Controllers
         {
             List<Vraboten> vraboteni = db.vraboteni.ToList();
             
-            if (!(Request.Form["vraboteni"] == null && Request.Form["vraboteni"] == ""))
+            if (Request.Form["saatnina"] != null && Request.Form["saatnina"] != "")
             {
-                Vraboten vraboten = db.vraboteni.Find(Int32.Parse(Request.Form["vraboteni"]));
-                vraboteni.Clear();
-                vraboteni.Add(vraboten);
-
+                foreach(Vraboten v in vraboteni)
+                {
+                    Debug.WriteLine(v.raboteno.Seconds + " " + v.raboteno.Minutes);
+                    double minutes = v.raboteno.Minutes / 60.0;
+                    Debug.WriteLine(minutes);
+                    double saati = v.raboteno.Days * 24.0 + v.raboteno.Minutes / 60.0 + v.raboteno.Seconds / 3600.0;
+                    Debug.WriteLine(saati);
+                    v.plata = saati * (double)Int32.Parse(Request.Form["saatnina"]);
+                    Debug.WriteLine("PLATA " + v.plata);
+                }
             }
                 return View(vraboteni);
         }

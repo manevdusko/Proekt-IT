@@ -3,7 +3,7 @@ namespace Proekt_IT.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Vraboteni : DbMigration
+    public partial class Vraboten : DbMigration
     {
         public override void Up()
         {
@@ -16,6 +16,7 @@ namespace Proekt_IT.Migrations
                         najava = c.Time(nullable: false, precision: 7),
                         odjava = c.Time(nullable: false, precision: 7),
                         raboteno = c.Time(nullable: false, precision: 7),
+                        plata = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.email);
             

@@ -19,6 +19,8 @@ namespace Proekt_IT.Models
 
         public TimeSpan raboteno { get; set; }
 
+        public double plata { get; set; }
+
         public Vraboten()
         {
         }
