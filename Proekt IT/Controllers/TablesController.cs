@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -15,7 +16,13 @@ namespace Proekt_IT.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.tables.ToList());
+            try
+            {
+                if(db.vraboteni.Find(User.Identity.Name) != null)
+                Debug.WriteLine(db.vraboteni.Find(User.Identity.Name).promet);
+            }
+            catch { }
+                return View(db.tables.ToList());
         }
 
         [Authorize]
@@ -44,6 +51,20 @@ namespace Proekt_IT.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Plata()
+        {
+            List<Vraboten> vraboteni = db.vraboteni.ToList();
+            
+            if (!(Request.Form["vraboteni"] == null && Request.Form["vraboteni"] == ""))
+            {
+                Vraboten vraboten = db.vraboteni.Find(Int32.Parse(Request.Form["vraboteni"]));
+                vraboteni.Clear();
+                vraboteni.Add(vraboten);
+
+            }
+                return View(vraboteni);
+        }
+
         [Authorize]
         public ActionResult Naracaj(int? id)
         {
@@ -68,7 +89,7 @@ namespace Proekt_IT.Controllers
 
             naracka.table = table;
             naracka.menu = db.menu.ToList();
-
+           
             return View(naracka);
         }
 
@@ -92,7 +113,15 @@ namespace Proekt_IT.Controllers
                         sb.Append(db.menu.Find(Int32.Parse(id)).imeNaJadenje + ", ");
                         t1.sum += db.menu.Find(Int32.Parse(id)).cena;
                         t1.orders = sb.ToString();
-                        Debug.WriteLine("Naracka : " + sb.ToString());
+
+                        if (db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0) == null)
+                        {
+                            db.vraboteni.Add(new Vraboten(User.Identity.Name, DateTime.UtcNow.TimeOfDay, DateTime.UtcNow.TimeOfDay, new TimeSpan(0,0,0,0), db.menu.Find(Int32.Parse(id)).cena));
+                        }
+                        else
+                        {
+                            db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).dodajPromet(db.menu.Find(Int32.Parse(id)).cena);
+                        }
                     }
                 }
                 db.SaveChanges();

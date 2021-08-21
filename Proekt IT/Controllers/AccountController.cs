@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -15,6 +16,8 @@ namespace Proekt_IT.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private RestaurantContext db = new RestaurantContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -72,6 +75,7 @@ namespace Proekt_IT.Controllers
             {
                 return View(model);
             }
+            
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -79,6 +83,18 @@ namespace Proekt_IT.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+
+                    if (db.vraboteni.FirstOrDefault(i => i.email.CompareTo(model.Email) == 0) == null)
+                    {
+                        Debug.WriteLine("DODAVAM");
+                        db.vraboteni.Add(new Vraboten(model.Email, DateTime.UtcNow.TimeOfDay, DateTime.UtcNow.TimeOfDay, new TimeSpan(0, 0, 0, 0), 0));
+                    }
+                    else {
+                        Debug.WriteLine("NE DODAVAM");
+                        db.vraboteni.FirstOrDefault(i => i.email.CompareTo(model.Email) == 0).najava = DateTime.UtcNow.TimeOfDay;
+                    }
+                    db.SaveChanges();
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -391,6 +407,15 @@ namespace Proekt_IT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            
+                if (db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0) != null)
+                {
+                    Debug.WriteLine("Pronajden");
+                    db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).odjava = DateTime.UtcNow.TimeOfDay;
+                    db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).raboteno.Add(db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).odjava.Subtract(db.vraboteni.FirstOrDefault(i => i.email.CompareTo(User.Identity.Name) == 0).najava));
+                }
+                 db.SaveChanges();            
+           
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
