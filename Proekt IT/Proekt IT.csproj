@@ -187,37 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202108181759023_initial.cs" />
-    <Compile Include="Migrations\202108181759023_initial.Designer.cs">
-      <DependentUpon>202108181759023_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108191232249_ListOfOrders.cs" />
-    <Compile Include="Migrations\202108191232249_ListOfOrders.Designer.cs">
-      <DependentUpon>202108191232249_ListOfOrders.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108191238461_ListOfOrders1.cs" />
-    <Compile Include="Migrations\202108191238461_ListOfOrders1.Designer.cs">
-      <DependentUpon>202108191238461_ListOfOrders1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108191707103_DisplayImageInMenu.cs" />
-    <Compile Include="Migrations\202108191707103_DisplayImageInMenu.Designer.cs">
-      <DependentUpon>202108191707103_DisplayImageInMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108192127072_ShoppingCart.cs" />
-    <Compile Include="Migrations\202108192127072_ShoppingCart.Designer.cs">
-      <DependentUpon>202108192127072_ShoppingCart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108192140031_ShoppingCart1.cs" />
-    <Compile Include="Migrations\202108192140031_ShoppingCart1.Designer.cs">
-      <DependentUpon>202108192140031_ShoppingCart1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108192144183_ShoppingCart11.cs" />
-    <Compile Include="Migrations\202108192144183_ShoppingCart11.Designer.cs">
-      <DependentUpon>202108192144183_ShoppingCart11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108211812361_Vraboten.cs" />
-    <Compile Include="Migrations\202108211812361_Vraboten.Designer.cs">
-      <DependentUpon>202108211812361_Vraboten.cs</DependentUpon>
+    <Compile Include="Migrations\202108212110284_initial.cs" />
+    <Compile Include="Migrations\202108212110284_initial.Designer.cs">
+      <DependentUpon>202108212110284_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -241,6 +213,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\background.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -320,29 +293,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202108181759023_initial.resx">
-      <DependentUpon>202108181759023_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108191232249_ListOfOrders.resx">
-      <DependentUpon>202108191232249_ListOfOrders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108191238461_ListOfOrders1.resx">
-      <DependentUpon>202108191238461_ListOfOrders1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108191707103_DisplayImageInMenu.resx">
-      <DependentUpon>202108191707103_DisplayImageInMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108192127072_ShoppingCart.resx">
-      <DependentUpon>202108192127072_ShoppingCart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108192140031_ShoppingCart1.resx">
-      <DependentUpon>202108192140031_ShoppingCart1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108192144183_ShoppingCart11.resx">
-      <DependentUpon>202108192144183_ShoppingCart11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108211812361_Vraboten.resx">
-      <DependentUpon>202108211812361_Vraboten.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202108212110284_initial.resx">
+      <DependentUpon>202108212110284_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
