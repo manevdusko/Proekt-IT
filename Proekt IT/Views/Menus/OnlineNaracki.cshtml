@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Proekt_IT.Models.OnlineNaracki>
+
+@{
+    ViewBag.Title = "Интернет нарачки";
+}
+
+<h2>Интернет нарачки</h2>
+
+<table class="table">
+    <tr>
+        <th>
+Нарачка
+        </th>
+        <th>
+Адреса
+        </th>
+        <th>
+За наплата
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.naracka)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cena)
+        </td>
+        <td>
+            @Html.ActionLink("Потврди", "Potvrdi", new { id=item.id })
+        </td>
+    </tr>
+}
+    @if(Model.Count() == 0)
+    {
+<td> Нема нарачки</td>
+            }
+
+</table>

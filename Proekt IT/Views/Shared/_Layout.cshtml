@@ -26,6 +26,7 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Маси", "Index", "Tables")</li>
+                        <li>@Html.ActionLink("е-нарачки", "OnlineNaracki", "Menus")</li>
                         <li>@Html.ActionLink("Платен извештај", "Plata", "Tables")</li>
                     }
                 </ul>

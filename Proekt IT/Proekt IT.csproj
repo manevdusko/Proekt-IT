@@ -191,12 +191,17 @@
     <Compile Include="Migrations\202108212110284_initial.Designer.cs">
       <DependentUpon>202108212110284_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109160940587_onlineNaracki.cs" />
+    <Compile Include="Migrations\202109160940587_onlineNaracki.Designer.cs">
+      <DependentUpon>202109160940587_onlineNaracki.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Naracka.cs" />
+    <Compile Include="Models\OnlineNaracki.cs" />
     <Compile Include="Models\RestaurantContext.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Table.cs" />
@@ -275,6 +280,7 @@
     <Content Include="Views\Menus\Meni.cshtml" />
     <Content Include="Views\Menus\ShoppingCart.cshtml" />
     <Content Include="Views\Tables\Plata.cshtml" />
+    <Content Include="Views\Menus\OnlineNaracki.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -295,6 +301,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202108212110284_initial.resx">
       <DependentUpon>202108212110284_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109160940587_onlineNaracki.resx">
+      <DependentUpon>202109160940587_onlineNaracki.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

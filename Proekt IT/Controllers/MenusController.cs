@@ -23,7 +23,7 @@ namespace Proekt_IT.Controllers
         private int SMTPport = 587;
 
         private string username = "dushkomanev@outlook.com";
-        private string password = "nSbW!pK!GesveZybMQ#uagwUwR76ykCw7MQXquM89XDP&EM^C1M^7K4Hv3ZY";
+        private string password = "TestPassword1!";
 
         public MenusController()
         {
@@ -142,11 +142,18 @@ namespace Proekt_IT.Controllers
                 //prakjanje na mailot
                 SMTPEmailClient.Send(EmailMessage);
             }
-            catch
+            catch(Exception e)
             {
-
+                Debug.Write(e.Message);
             }
         }
+
+        [Authorize]
+        public ActionResult OnlineNaracki()
+        {
+            return View(db.onlineNaracki.ToList());
+        }
+
 
         public ActionResult Naracaj()
         {
@@ -161,6 +168,7 @@ namespace Proekt_IT.Controllers
                 sb.Append(tmp.imeNaJadenje + ", ");
                 db.shoppingCart.Remove(m);
             }
+            db.onlineNaracki.Add(new OnlineNaracki(sb.ToString(), Request.Form["address"], c));
             sendMail(Request.Form["email"], "Успешна нарачка од нашиот ресторант", "Вашата нарачка е успешна и ќе биде доставена на адреса " + Request.Form["address"] + ". Имате вкупно: " + c + " денари за наплата а нарачавте: " + sb.ToString());
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -173,6 +181,15 @@ namespace Proekt_IT.Controllers
             db.shoppingCart.Add(sc);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult Potvrdi(int? id)
+        {
+                OnlineNaracki naracka = db.onlineNaracki.Find(id);
+                db.onlineNaracki.Remove(naracka);
+                db.SaveChanges();
+                return RedirectToAction("OnlineNaracki");
         }
 
         [Authorize]

@@ -8,6 +8,7 @@ namespace Proekt_IT.Models
         public DbSet<Menu> menu { get; set; }
         public DbSet<ShoppingCart> shoppingCart { get; set; }
         public DbSet<Vraboten> vraboteni { get; set; }
+        public DbSet<OnlineNaracki> onlineNaracki { get; set; }
 
         public RestaurantContext() : base("DefaultConnection") { }
         public static RestaurantContext Create()
